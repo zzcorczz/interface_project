@@ -11,11 +11,11 @@ export default function TopRow() {
     const [lowBattery, setLowBattery] = useState(false);
 
     return (
-        <div className='w-full h-1/6 bg-red-500'>
-            <div className="bg-white w-full h-1/4"></div>
-            <div className="bg-black w-full h-1/4"></div>
-            <div className="bg-yellow-50 w-full h-1/4"></div>
-            <div className="bg-blue-400 w-full h-1/4"></div>
+        <div className='relative flex flex-row w-screen h-1/6 bg-transparent'>
+            <div className="bg-white w-1/6"></div>
+            <div className="bg-black w-1/6"></div>
+            <div className="bg-yellow-50 w-1/6"></div>
+            <div className="bg-blue-400 w-1/6"></div>
         </div>
     );
 }

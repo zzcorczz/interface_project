@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model machine {
+  id            Int     @id @default(1)
+  parking       Boolean @default(false)
+  engineStatus  Boolean @default(false)
+  motorStatus   Boolean @default(false)
+  batteryStatus Boolean @default(false)
+  powerGauge    Int     @default(0)
+  motorGauge    Int     @default(0)
+  gearRatio     Int     @default(0)
+  juice         Int     @default(0)
+  batteryTemp   Int     @default(10)
+  motorRpm      Int     @default(0)
+  setting       Int     @default(0)
+}
