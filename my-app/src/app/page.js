@@ -20,6 +20,7 @@ export default function Home() {
   //
   const [machine, setMachine] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [setting, setSettting] = useState(0);
 
   async function updateSetting() {
     setLoading(true);
@@ -66,41 +67,37 @@ export default function Home() {
     setMachine(res);
   }, []);
 
-  return (
-    <div className="flex-col overflow-hidden bg-gray-300 min-h-screen h-screen w-screen p-0 m-0 font-[family-name:var(--font-geist-sans)]">
-      <TopRow></TopRow>
-      <div className="flex flex-col items-center h-full w-full">
-        {machine ? (
+  if (machine) {
+    return (
+      <div className="flex-col overflow-hidden bg-gray-300 min-h-screen h-screen w-screen p-0 m-0 font-[family-name:var(--font-geist-sans)]">
+        <TopRow></TopRow>
+        <div className="flex flex-col items-center h-full w-full">
           <div>parking status of machine: {machine.parking}</div>
-        ) : (
-          <div>loading..</div>
-        )}
-        {/* {machine.engineStatus ? <div>Engine On</div> : <div>Engine Off</div>} */}
-        {/* {machine.motorStatus ? ( */}
-        {/*   <div>MotorStatus: repair needed</div> */}
-        {/* ) : ( */}
-        {/*   <div>MotorStatus: repair not needed</div> */}
-        {/* )} */}
-        {/* {machine.batteryStatus ? ( */}
-        {/*   <div>Battery Low</div> */}
-        {/* ) : ( */}
-        {/*   <div>Battery Normal</div> */}
-        {/* )} */}
-        {/* {<div>gearRatio: {machine.gearRatio}</div>} */}
-        {/* {<div>Power Gauge: {machine.powerGauge}</div>} */}
-        {/* {<div>Motor Gauge: {machine.motorGauge}</div>} */}
-        {/* {<div>Battery Percentage: {machine.juice}</div>} */}
-        {/* {<div>Battery Temperature: {machine.batteryTemp}</div>} */}
-        {/* {<div>MotorRPM: {machine.motorRpm}</div>} */}
-        {/* {<div>Setting: {setting}</div>} */}
-        {/* <div className="flex flex-row w-full justify-evenly"> */}
-        {/*   <button>OFF</button> */}
-        {/*   <button>1</button> */}
-        {/*   <button>2</button> */}
-        {/*   <button>3</button> */}
-        {/*   <button>4</button> */}
-        {/* </div> */}
+          <div>{machine.engineStatus ? "Engine On" : "Engine Off"}</div>
+          <div>
+            {machine.motorStatus
+              ? "MotorStatus: repair needed"
+              : "MotorStatus: repair not needed"}
+          </div>
+          <div>{machine.batteryStatus ? "Battery Low" : "Battery Normal"}</div>
+          <div>gearRatio: {machine.gearRatio}</div>
+          <div>Power Gauge: {machine.powerGauge}</div>
+          <div>Motor Gauge: {machine.motorGauge}</div>
+          <div>Battery Percentage: {machine.juice}</div>
+          <div>Battery Temperature: {machine.batteryTemp}</div>
+          <div>MotorRPM: {machine.motorRpm}</div>
+          <div>Setting: {setting}</div>
+          <div className="flex flex-row w-full justify-evenly">
+            <button>OFF</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
 }
