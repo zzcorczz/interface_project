@@ -1,21 +1,51 @@
+"use client";
+import Box from "./components/Box.jsx";
+import LowBattery from "./components/LowBattery.jsx";
 
-'use client'
+import React, { useState } from "react";
 
-import React, { useState } from 'react'
+export default function TopRow({ machine, juice }) {
+  const getColor = (type) => {
+    switch (type) {
+      case "parking":
+        return machine.parking ? "red" : "gray";
+      case "engineWarning":
+        return machine.engineStatus ? "red" : "gray";
+      case "motor":
+        return machine.motorStatus ? "red" : "gray";
+      case "lowBattery":
+        if (juice < 25) {
+          return "red";
+        } else {
+          return "gray";
+        }
+      default:
+        return "gray";
+    }
+  };
 
-export default function TopRow() {
-
-    const [park, setPark] = useState(false);
-    const [engineStat, setEngineStat] = useState(false);
-    const [motorStat, setMotorStat] = useState(false);
-    const [lowBattery, setLowBattery] = useState(false);
-
-    return (
-        <div className='relative flex flex-row w-screen h-1/6 bg-transparent'>
-            <div className="bg-white w-1/6"></div>
-            <div className="bg-black w-1/6"></div>
-            <div className="bg-yellow-50 w-1/6"></div>
-            <div className="bg-blue-400 w-1/6"></div>
-        </div>
-    );
+  return (
+    <div className="top-0 flex flex-row w-[99vw] h-1/6 bg-[#1A1A1A] mb-2 rounded-md shadow-md shadow-black">
+      <div className="flex bg-transparent w-1/12 border-r-2 border-r-gray-500 justify-center items-center">
+        <Box type="parking" color={getColor("parking")} className="h-1/2"></Box>
+      </div>
+      <div className="flex bg-transparent w-1/12 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
+        <Box
+          type="engineWarning"
+          color={getColor("engineWarning")}
+          className="h-3/4"
+        ></Box>
+      </div>
+      <div className="flex bg-transparent w-1/12 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
+        <Box type="motor" color={getColor("motor")} className="h-3/4"></Box>
+      </div>
+      <div className="flex bg-transparent w-1/12 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
+        <Box
+          type="lowbattery"
+          color={getColor("lowBattery")}
+          className="h-2/3"
+        ></Box>
+      </div>
+    </div>
+  );
 }

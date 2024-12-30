@@ -11,7 +11,7 @@ export async function PATCH(req) {
 
   try {
     let result;
-    if (setting != -1) {
+    if (setting !== -1) {
       result = await prisma.machine.update({
         where: { id: 1 },
         data: {
@@ -20,7 +20,7 @@ export async function PATCH(req) {
           motorGauge: setting * 200,
           powerGauge: setting * 250,
           motorRpm: setting * 200,
-          motorStatus: setting > 1,
+          motorStatus: setting > 2,
         },
       });
     } else {
@@ -32,7 +32,7 @@ export async function PATCH(req) {
           motorGauge: 0,
           powerGauge: -250,
           motorRpm: 0,
-          motorStatus: setting > 1,
+          motorStatus: setting > 2,
         },
       });
     }
@@ -69,6 +69,17 @@ function juiceUpdateStart(setting) {
       console.log("interval cleared:juice");
       clearInterval(juiceUpdateInterval);
       juiceUpdateInterval = null;
+      await prisma.machine.update({
+        where: { id: 1 },
+        data: {
+          setting: 0,
+          gearRatio: 0,
+          motorGauge: 0,
+          powerGauge: 0,
+          motorRpm: 0,
+          motorStatus: false,
+        },
+      });
     }
   }, 500);
 }

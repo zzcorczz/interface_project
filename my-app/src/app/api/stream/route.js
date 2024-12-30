@@ -17,11 +17,7 @@ export async function GET(req) {
         return;
       }
 
-      if (
-        !data ||
-        data.juice !== machine.juice ||
-        data.batteryTemp !== machine.batteryTemp
-      ) {
+      if (!data || JSON.stringify(data) !== JSON.stringify(machine)) {
         writer.write(`data: ${JSON.stringify(machine)}\n\n`);
         data = machine;
       }
