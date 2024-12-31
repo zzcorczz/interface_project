@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Box from "./Box.jsx";
 import BatteryGauge from "react-battery-gauge";

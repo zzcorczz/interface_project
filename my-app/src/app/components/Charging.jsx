@@ -1,3 +1,4 @@
+"use client";
 const Charging = (props) => (
   <svg
     t="1735608806964"

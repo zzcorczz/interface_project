@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Motor from "../components/Motor.jsx";
 import LowBattery from "./LowBattery.jsx";
