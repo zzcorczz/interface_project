@@ -27,7 +27,7 @@ export async function GET(req) {
     }
   }
 
-  let interval = setInterval(update, 500);
+  let interval = setInterval(update, 1000);
 
   req.signal.addEventListener("abort", () => {
     clearInterval(interval);

@@ -80,7 +80,7 @@ function juiceUpdateStart(setting) {
         },
       });
     }
-  }, 500);
+  }, 1500);
 }
 
 function tempUpdateStart(setting) {
@@ -105,5 +105,5 @@ function tempUpdateStart(setting) {
       clearInterval(TempUpdateInterval);
       TempUpdateInterval = null;
     }
-  }, 500);
+  }, 1000);
 }

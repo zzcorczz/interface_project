@@ -59,5 +59,5 @@ function chargingStart(charging) {
       clearInterval(chargingInterval);
       chargingInterval = null;
     }
-  }, 500);
+  }, 1000);
 }
