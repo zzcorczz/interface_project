@@ -40,6 +40,8 @@ export async function GET(req) {
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache",
       Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
+      "Content-Encoding": "identity",
     },
   });
 }
