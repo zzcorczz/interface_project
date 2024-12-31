@@ -6,6 +6,7 @@ import Parking from "./Parking.jsx";
 import GearRatio from "./GearRatio.jsx";
 import BatteryTemp from "./BatteryTemp.jsx";
 import Menu from "./Menu.jsx";
+import Charging from "./Charging.jsx";
 
 function Box({ type, color, className }) {
   const map = {
@@ -20,6 +21,7 @@ function Box({ type, color, className }) {
       <BatteryTemp color={color} className={className}></BatteryTemp>
     ),
     Menu: <Menu color={color} className={className}></Menu>,
+    Charging: <Charging color={color} className={className}></Charging>,
   };
 
   return map[type] || null;

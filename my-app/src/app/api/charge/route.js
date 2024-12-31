@@ -4,7 +4,6 @@ let chargingInterval;
 
 export async function PATCH(req) {
   const { charge } = await req.json();
-  console.log("This is charging status", charge);
 
   try {
     clearInterval(chargingInterval);
@@ -24,21 +23,39 @@ export async function PATCH(req) {
 
 function chargingStart(charging) {
   return setInterval(async () => {
-    console.log("charging!");
     const machine = await prisma.machine.findUnique({ where: { id: 1 } });
 
-    if (machine.juice >= 100) {
+    if (machine.juice >= 100 && charging === true) {
       clearInterval(chargingInterval);
       chargingInterval = null;
       charging = false;
+      await prisma.machine.update({
+        where: { id: 1 },
+        data: {
+          powerGauge: 0,
+          setting: 0,
+          gearRatio: 0,
+          motorGauge: 0,
+          motorRpm: 0,
+          motorStatus: false,
+        },
+      });
+      return;
     }
     if (charging === true) {
       await prisma.machine.update({
         where: { id: 1 },
-        data: { juice: machine.juice + 1 },
+        data: {
+          juice: machine.juice + 1,
+          powerGauge: -250,
+          setting: 0,
+          gearRatio: 0,
+          motorGauge: 0,
+          motorRpm: 0,
+          motorStatus: false,
+        },
       });
     } else {
-      console.log("interval cleared:Battery Full");
       clearInterval(chargingInterval);
       chargingInterval = null;
     }

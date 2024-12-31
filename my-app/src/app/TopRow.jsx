@@ -25,7 +25,7 @@ export default function TopRow({ machine, juice }) {
   };
 
   return (
-    <div className="top-0 flex flex-row w-[99vw] h-1/6 bg-[#1A1A1A] mb-2 rounded-md shadow-md shadow-black">
+    <div className="top-0 flex flex-row w-[99.5%] h-1/6 bg-[#1A1A1A] mb-2 rounded-md shadow-md shadow-black">
       <div className="flex bg-transparent w-1/12 border-r-2 border-r-gray-500 justify-center items-center">
         <Box type="parking" color={getColor("parking")} className="h-1/2"></Box>
       </div>

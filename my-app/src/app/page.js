@@ -49,6 +49,17 @@ export default function Home() {
           text: "Charge the battery first!",
           icon: "question",
         });
+        if (setting === 0 && charging === false) {
+          const res = await fetch("api/interface", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ setting }),
+          });
+
+          if (!res.ok) {
+            throw new Error("failed to update setting");
+          }
+        }
         return;
       }
       if (setting !== -1) {
@@ -118,8 +129,11 @@ export default function Home() {
       return;
     } else if (machine.juice === 0 && setting !== 0) {
       setSetting(0);
+      changeSetting(0);
     } else if (machine.juice === 100 && setting === -1) {
       setCharging(false);
+      setSetting(0);
+      console.log("fired");
       setDisabled(true);
       Swal.fire({
         title: "Charging Complete!",
@@ -133,45 +147,58 @@ export default function Home() {
 
   if (machine) {
     return (
-      <div className="overflow-hidden flex flex-col items-center justify-center bg-[#5A5A5A] min-h-screen h-full w-full font-[family-name:var(--font-geist-sans)]">
+      <div className="overflow-hidden flex flex-col items-center justify-center bg-[#5A5A5A] min-h-screen h-screen w-screen font-[family-name:var(--font-geist-sans)]">
         <TopRow machine={machine} juice={machine.juice}></TopRow>
-        <MiddleRow value={machine.motorGauge}></MiddleRow>
-        <div className="flex flex-row w-[99%] h-32 mb-3 bg-[#1A1A1A] rounded-md shadow-md shadow-black">
+        <MiddleRow machine={machine}></MiddleRow>
+        <div className="flex flex-row w-[99.5%] h-1/6 mb-3 bg-[#1A1A1A] rounded-md shadow-md shadow-black">
           <ThirdRow
             juice={machine.juice}
             set={changeSetting}
             charging={charging}
+            rpm={machine.motorRpm}
+            temp={machine.batteryTemp}
+            gear={machine.gearRatio}
           ></ThirdRow>
-          <div className="flex bg-white w-[70%] justify-center items-center">
+          <div className="w-1/5 bg-transparent h-full"></div>
+          <div className="flex flex-col bg-transparent w-[70%] justify-center items-center">
+            <h1 className="text-white text-4xl">MOTOR SPEED SETTING</h1>
             <Slider
               value={setting}
-              sx={{
-                width: "80%",
-              }}
               marks={marks}
               min={0}
               max={4}
+              sx={{
+                width: "80%",
+                "& .MuiSlider-thumb": {
+                  backgroundColor: "black",
+                  border: "2px solid white",
+                  "&.Mui-active": {
+                    boxShadow: "0 0 0 12px rgba(0, 0, 255, 0.3)",
+                  },
+                },
+                "& .MuiSlider-track": {
+                  backgroundColor: "gray",
+                  height: "10px",
+                },
+                "& .MuiSlider-rail": {
+                  backgroundColor: "gray",
+                  height: "10px",
+                },
+                "& .MuiSlider-mark": {
+                  backgroundColor: "#00000000",
+                  height: "8px",
+                  width: "2px",
+                },
+                "& .MuiSlider-markLabel": {
+                  color: "white",
+                  fontSize: "24px",
+                },
+              }}
               onChange={(event, newValue) => changeSetting(newValue)}
             />
           </div>
         </div>
-        {/* <div>{machine.batteryStatus ? "Battery Low" : "Battery Normal"}</div> */}
-        {/* <div>gearRatio: {machine.gearRatio}</div> */}
-        {/* <div>Power Gauge: {machine.powerGauge}</div> */}
-        {/* <div>Motor Gauge: {machine.motorGauge}</div> */}
-        {/* <div>Battery Percentage: {juice}</div> */}
-        {/* <div>Battery Temperature: {temp}</div> */}
-        {/* <div>MotorRPM: {machine.motorRpm}</div> */}
-        {/* <div>Setting: {machine.setting}</div> */}
-        {/* <div> charging status {charging.toString()} </div> */}
-        {/* <div className="flex flex-row w-full justify-evenly"> */}
-        {/*   <button onClick={() => changeSetting(0)}>OFF</button> */}
-        {/*   <button onClick={() => changeSetting(1)}>1</button> */}
-        {/*   <button onClick={() => changeSetting(2)}>2</button> */}
-        {/*   <button onClick={() => changeSetting(3)}>3</button> */}
-        {/*   <button onClick={() => changeSetting(4)}>4</button> */}
-        {/* </div> */}
-        <div className="flex relative justify-between w-[99vw] h-1/6 bg-[#1A1A1A] rounded-md shadow-md shadow-black">
+        <div className="flex relative justify-between w-[99.5%] h-1/8 bg-[#1A1A1A] rounded-md shadow-md shadow-black">
           <BottomRow />
 
           {/* <div className="flex w-[100vw] bg-red-400 items-center justify-center"> */}
@@ -183,8 +210,24 @@ export default function Home() {
               ></Box>
             </div>
           </div>
-          <button onClick={() => startCharging(!charging)} disabled={disabled}>
-            {charging ? "Stop Charging" : "StartCharging"}
+          <button
+            className="h-auto w-24 aspect-square justify-center items-center"
+            onClick={() => startCharging(!charging)}
+            disabled={disabled}
+          >
+            {charging ? (
+              <Box
+                type={"Charging"}
+                color={"green"}
+                className={"h-full w-full"}
+              ></Box>
+            ) : (
+              <Box
+                type={"Charging"}
+                color={"gray"}
+                className={"h-full w-full"}
+              ></Box>
+            )}
           </button>
         </div>
       </div>

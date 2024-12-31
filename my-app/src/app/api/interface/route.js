@@ -5,6 +5,7 @@ let juiceUpdateInterval;
 
 export async function PATCH(req) {
   const { setting } = await req.json();
+  console.log("This is the setting received", setting);
   if (setting > 4 || setting < -1) {
     return res.status(400).json({ error: "Invalid Setting Value" });
   }
@@ -23,19 +24,19 @@ export async function PATCH(req) {
           motorStatus: setting > 2,
         },
       });
-    } else {
-      result = await prisma.machine.update({
-        where: { id: 1 },
-        data: {
-          setting: 0,
-          gearRatio: 0,
-          motorGauge: 0,
-          powerGauge: -250,
-          motorRpm: 0,
-          motorStatus: setting > 2,
-        },
-      });
     }
+    // } else {
+    //   result = await prisma.machine.update({
+    //     where: { id: 1 },
+    //     data: {
+    //       setting: 0,
+    //       gearRatio: 0,
+    //       motorGauge: 0,
+    //       powerGauge: -250,
+    //       motorRpm: 0,
+    //       motorStatus: setting > 2,
+    //     },
+    //   });
 
     clearInterval(TempUpdateInterval);
     TempUpdateInterval = null;
@@ -58,7 +59,6 @@ export async function PATCH(req) {
 
 function juiceUpdateStart(setting) {
   return setInterval(async () => {
-    console.log("juice draining");
     const machine = await prisma.machine.findUnique({ where: { id: 1 } });
     if (setting > 0 && machine.juice > 0) {
       await prisma.machine.update({
@@ -66,7 +66,6 @@ function juiceUpdateStart(setting) {
         data: { juice: machine.juice - 1 },
       });
     } else if (machine.juice === 0 || setting <= 0) {
-      console.log("interval cleared:juice");
       clearInterval(juiceUpdateInterval);
       juiceUpdateInterval = null;
       await prisma.machine.update({
@@ -90,10 +89,8 @@ function tempUpdateStart(setting) {
     tempTarget = 25;
   }
 
-  console.log(tempTarget);
   return setInterval(async () => {
     const machine = await prisma.machine.findUnique({ where: { id: 1 } });
-    console.log(machine.batteryTemp);
     if (machine.batteryTemp < tempTarget) {
       await prisma.machine.update({
         where: { id: 1 },
