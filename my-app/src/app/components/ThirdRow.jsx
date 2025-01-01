@@ -45,9 +45,9 @@ export default function ThirdRow(props) {
         <BatteryGauge
           value={props.juice}
           orientation={"vertical"}
-          size={100}
+          size={70}
           customization={customization}
-          className="mb-[7%]"
+          className="mb-2"
         ></BatteryGauge>
         <div className="relative text-white">{props.juice}</div>
         <h1 className="text-gray-500 relative ">%</h1>
@@ -56,7 +56,7 @@ export default function ThirdRow(props) {
         <Box
           type="batteryTemp"
           color={"gray"}
-          className="relative h-full top-[22%] left-[10%]"
+          className="relative h-full top-[17%] left-[10%]"
         ></Box>
         <div className="relative bottom-[2%] text-white">{props.temp}</div>
         <h1 className="text-gray-500 relative bottom-[0%]">°C</h1>
