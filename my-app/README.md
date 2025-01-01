@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Interface Project
+Project link - https://demo1.interface-challenge-zzc.xyz/
+
+## Tech stacks used
+Frontend: react/tailwind
+Backend: Next.js/node.js
+Deployment: AWS EC2
+Database: Prisma/Postgresql/Render
+Development Environment: Ubuntu 22.04 / neovim / tmux
+
+## Design choices
+- when the machine is charging, the motor will be automatically turned off, along with the speed setting set to OFF.
+- When the motor is running, the user can start charging as well, the motor will automatically turned off.
+- When charging, you can also turn on the motor, this will result in charging stopped.
+- When the battery reaches 0%, the setting will be set to OFF, and the system will remind you to charge the machine. You cannot turn on the motor before you charge.
+- When the battery is full, charging will automatically stop, and you won't be able to turn on charging again if the battery is still full.
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. clone this github repo
+2. install dependencies (npm install)
+3. install and run postgresql server
+4. create a environment variable file (.env)
+5. in the .env file, specify your database address (usually in this format: DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public")
+6. after setting up .env, run npx prisma db push to push the schema in the database
+7. run development server (npm run dev)
+8. (optional) build the app by running: npx next build
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
