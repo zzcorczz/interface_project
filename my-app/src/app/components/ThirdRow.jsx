@@ -45,9 +45,9 @@ export default function ThirdRow(props) {
         <BatteryGauge
           value={props.juice}
           orientation={"vertical"}
-          size={100}
+          size={70}
           customization={customization}
-          className="mb-8"
+          className="mb-2"
         ></BatteryGauge>
         <div className="relative text-white">{props.juice}</div>
         <h1 className="text-gray-500 relative ">%</h1>
