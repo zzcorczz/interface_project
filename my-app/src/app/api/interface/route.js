@@ -5,7 +5,6 @@ let juiceUpdateInterval;
 
 export async function PATCH(req) {
   const { setting } = await req.json();
-  console.log("This is the setting received", setting);
   if (setting > 4 || setting < -1) {
     return res.status(400).json({ error: "Invalid Setting Value" });
   }
@@ -80,7 +79,7 @@ function juiceUpdateStart(setting) {
         },
       });
     }
-  }, 1500);
+  }, 1000);
 }
 
 function tempUpdateStart(setting) {

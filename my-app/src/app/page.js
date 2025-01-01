@@ -18,10 +18,7 @@ export default function Home() {
   ];
 
   const [machine, setMachine] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [setting, setSetting] = useState(0);
-  const [temp, setTemp] = useState(0);
-  const [juice, setJuice] = useState(0);
   const [charging, setCharging] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
@@ -50,6 +47,11 @@ export default function Home() {
           icon: "question",
         });
         if (setting === 0 && charging === false) {
+          Swal.fire({
+            title: "try",
+            text: "!",
+            icon: "success",
+          });
           const res = await fetch("api/interface", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -128,12 +130,12 @@ export default function Home() {
     if (!machine) {
       return;
     } else if (machine.juice === 0 && setting !== 0) {
+      changeSetting(0, false);
+      setCharging(false);
       setSetting(0);
-      changeSetting(0);
     } else if (machine.juice === 100 && setting === -1) {
       setCharging(false);
       setSetting(0);
-      console.log("fired");
       setDisabled(true);
       Swal.fire({
         title: "Charging Complete!",

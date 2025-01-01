@@ -19,6 +19,7 @@ model machine {
   engineStatus  Boolean @default(false)
   motorStatus   Boolean @default(false)
   batteryStatus Boolean @default(false)
+  charging      Boolean @default(false)
   powerGauge    Int     @default(0)
   motorGauge    Int     @default(0)
   gearRatio     Int     @default(0)

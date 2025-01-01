@@ -38,6 +38,7 @@ function chargingStart(charging) {
           motorGauge: 0,
           motorRpm: 0,
           motorStatus: false,
+          charging: charging,
         },
       });
       return;
@@ -53,6 +54,7 @@ function chargingStart(charging) {
           motorGauge: 0,
           motorRpm: 0,
           motorStatus: false,
+          charging: charging,
         },
       });
     } else {
