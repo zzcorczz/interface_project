@@ -49,17 +49,17 @@ export default function ThirdRow(props) {
           size={100}
           customization={customization}
         ></BatteryGauge>
-        <div className="relative top-[14%] text-white">{props.juice}</div>
-        <h1 className="text-gray-500 relative top-[14%]">%</h1>
+        <div className="relative top-[5%] text-white">{props.juice}</div>
+        <h1 className="text-gray-500 relative top-[5%]">%</h1>
       </div>
       <div className="flex flex-col bg-transparent w-1/6 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
         <Box
           type="batteryTemp"
           color={"gray"}
-          className="relative h-full top-[15%] left-[10%]"
+          className="relative h-full top-[17%] left-[10%]"
         ></Box>
         <div className="relative bottom-[2%] text-white">{props.temp}</div>
-        <h1 className="text-gray-500 relative bottom-[1%]">°C</h1>
+        <h1 className="text-gray-500 relative bottom-[0%]">°C</h1>
       </div>
       <div className="flex flex-col bg-transparent w-1/6 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
         <Box type="motor" color={"gray"} className="h-2/3 w-[100%]"></Box>

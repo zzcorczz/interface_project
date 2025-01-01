@@ -47,11 +47,6 @@ export default function Home() {
           icon: "question",
         });
         if (setting === 0 && charging === false) {
-          Swal.fire({
-            title: "try",
-            text: "!",
-            icon: "success",
-          });
           const res = await fetch("api/interface", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
