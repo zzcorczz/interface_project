@@ -2,11 +2,11 @@
 Project link - https://demo1.interface-challenge-zzc.xyz/
 
 ## Tech stacks used
-Frontend: react/tailwind
-Backend: Next.js/node.js
-Deployment: AWS EC2
-Database: Prisma/Postgresql/Render
-Development Environment: Ubuntu 22.04 / neovim / tmux
+- Frontend: react/tailwind
+- Backend: Next.js/node.js
+- Deployment: AWS EC2
+- Database: Prisma/Postgresql/Render
+- Development Environment: Ubuntu 22.04 / neovim / tmux
 
 ## Design choices
 - when the machine is charging, the motor will be automatically turned off, along with the speed setting set to OFF.
