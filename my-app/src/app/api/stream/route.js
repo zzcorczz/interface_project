@@ -1,5 +1,19 @@
+/**
+ * The stream endpoint.
+ * @description the stream endpoint lets you establish server-sent events stream.
+ * This is the beakend implementation of the SSE design.
+ * It constantly talks to the database and when new data is received, it pushes
+ * the new data to the client side.
+ */
+
 import prisma from "../../lib/db.ts";
 
+/**
+ * The GET() method.
+ * @description GET method establishes a TransformStream.
+ * It checks for any change in the database. If there is one,
+ * it pushes data to the client.
+ */
 export async function GET(req) {
   const { readable, writable } = new TransformStream();
   const writer = writable.getWriter();

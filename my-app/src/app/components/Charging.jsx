@@ -1,4 +1,9 @@
 "use client";
+
+/**
+ * svg icon made by Zichuan Zhang
+ * made according to the examples given.
+ */
 const Charging = (props) => (
   <svg
     t="1735608806964"

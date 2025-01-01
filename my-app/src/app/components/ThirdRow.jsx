@@ -1,12 +1,19 @@
 "use client";
-
 import React, { useState } from "react";
 import Box from "./Box.jsx";
 import BatteryGauge from "react-battery-gauge";
-import Slider from "@mui/material/Slider";
+
+/**
+ * ThirdRow Component.
+ * @description The third row of the interface.
+ * This component will take relevant user data and display them on the screen.
+ * It reutilizes some of the key components from the TopRow Component.
+ * @param {object} props - user data needed.
+ * @param {numebr} props.juice - the current battery percentage.
+ * @param {number} props.rpm - the current rpm of the machine.
+ */
 
 export default function ThirdRow(props) {
-  const [value, setValue] = useState(0);
   const customization = {
     batteryBody: {
       strokeColor: "gray",
@@ -24,14 +31,6 @@ export default function ThirdRow(props) {
     },
   };
 
-  const marks = [
-    { value: 0, label: "OFF" },
-    { value: 1, label: "1" },
-    { value: 2, label: "2" },
-    { value: 3, label: "3" },
-    { value: 4, label: "4" },
-  ];
-
   return (
     <>
       <div className="flex flex-col bg-transparent w-1/6 border-r-2 border-r-gray-500 justify-center items-center">
@@ -42,17 +41,18 @@ export default function ThirdRow(props) {
         ></Box>
         <div className="text-white">{props.gear}</div>
       </div>
-      <div className="flex flex-col bg-transparent w-1/6 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
+      <div className="flex flex-col bg-transparent w-1/6 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-end items-center">
         <BatteryGauge
           value={props.juice}
           orientation={"vertical"}
           size={100}
           customization={customization}
+          className="mb-8"
         ></BatteryGauge>
-        <div className="relative top-[5%] text-white">{props.juice}</div>
-        <h1 className="text-gray-500 relative top-[5%]">%</h1>
+        <div className="relative text-white">{props.juice}</div>
+        <h1 className="text-gray-500 relative ">%</h1>
       </div>
-      <div className="flex flex-col bg-transparent w-1/6 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-center items-center">
+      <div className="flex flex-col bg-transparent w-1/6 border-l-2 border-r-2 border-l-gray-500 border-r-gray-500 justify-end items-center">
         <Box
           type="batteryTemp"
           color={"gray"}

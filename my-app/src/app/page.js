@@ -8,6 +8,11 @@ import Slider from "@mui/material/Slider";
 import BottomRow from "./BottomRow.jsx";
 import Box from "./components/Box.jsx";
 
+/**
+ * Home component
+ * @description website client side home page.
+ * The entry of the web application.
+ */
 export default function Home() {
   const marks = [
     { value: 0, label: "OFF" },
@@ -22,6 +27,10 @@ export default function Home() {
   const [charging, setCharging] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
+  /**
+   * getData() function
+   * @description get initial data from the backend.
+   */
   async function getData() {
     try {
       const res = await fetch("api/initial_data");
@@ -38,8 +47,14 @@ export default function Home() {
     }
   }
 
+  /**
+   * changeSetting() function
+   * @description changed the setting of the machine based on
+   * user selection and charging state.
+   */
   async function changeSetting(setting, charging) {
     try {
+      console.log(setting);
       if (machine.juice === 0 && setting !== -1) {
         Swal.fire({
           title: "No Power!",
@@ -83,13 +98,19 @@ export default function Home() {
     }
   }
 
+  /**
+   * startCharging() function
+   * @description start charging when the user pressed
+   * charging button.
+   */
   async function startCharging(charge) {
     try {
       setCharging(charge);
+      console.log(charge);
       if (charge === false) {
-        changeSetting(0);
+        changeSetting(0, charge);
       } else {
-        changeSetting(-1);
+        changeSetting(-1, charge);
       }
 
       const res = await fetch("api/charge", {
@@ -105,11 +126,13 @@ export default function Home() {
     }
   }
 
+  // get initial data
   useEffect(() => {
     const res = getData();
     setMachine(res);
   }, []);
 
+  // establish event stream
   useEffect(() => {
     const eventListener = new EventSource("/api/stream");
     eventListener.onmessage = (event) => {
@@ -121,10 +144,11 @@ export default function Home() {
     };
   }, []);
 
+  // update state variables when backend data changes.
   useEffect(() => {
     if (!machine) {
       return;
-    } else if (machine.juice === 0 && setting !== 0) {
+    } else if (machine.juice === 0 && setting > 0) {
       changeSetting(0, false);
       setCharging(false);
       setSetting(0);
@@ -198,7 +222,6 @@ export default function Home() {
         <div className="flex relative justify-between w-[99.5%] h-1/8 bg-[#1A1A1A] rounded-md shadow-md shadow-black">
           <BottomRow />
 
-          {/* <div className="flex w-[100vw] bg-red-400 items-center justify-center"> */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="flex items-center justify-center bg-[#333333] w-1/12 h-full border-l-2 border-r-2 border-l-gray-500 border-r-gray-500">
               <Box

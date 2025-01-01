@@ -4,6 +4,12 @@ import LowBattery from "./components/LowBattery.jsx";
 
 import React, { useState } from "react";
 
+/**
+ * TopRow component
+ * @description The wrapper for top row icons.
+ * @param {object} machine: the machine object containing data of the machine.
+ * @param {number} juice: battery percentage.
+ */
 export default function TopRow({ machine, juice }) {
   const getColor = (type) => {
     switch (type) {

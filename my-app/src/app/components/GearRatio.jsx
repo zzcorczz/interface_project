@@ -1,3 +1,7 @@
+/**
+ * svg icon made by Zichuan Zhang
+ * made according to the examples given.
+ */
 const GearRatio = (props) => (
   <svg
     width="200"

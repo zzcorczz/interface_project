@@ -1,28 +1,12 @@
 "use client";
 import Box from "./components/Box.jsx";
 
-import React, { useState } from "react";
+/**
+ * BottomRow component
+ * @description wrapper for the bottom row icons.
+ */
 
 export default function BottomRow({ machine, juice }) {
-  const getColor = (type) => {
-    switch (type) {
-      case "parking":
-        return machine.parking ? "red" : "gray";
-      case "engineWarning":
-        return machine.engineStatus ? "red" : "gray";
-      case "motor":
-        return machine.motorStatus ? "red" : "gray";
-      case "lowBattery":
-        if (juice < 25) {
-          return "red";
-        } else {
-          return "gray";
-        }
-      default:
-        return "gray";
-    }
-  };
-
   return (
     <>
       <div className="flex w-1/5">

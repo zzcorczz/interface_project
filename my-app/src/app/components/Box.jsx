@@ -10,6 +10,13 @@ import BatteryTemp from "./BatteryTemp.jsx";
 import Menu from "./Menu.jsx";
 import Charging from "./Charging.jsx";
 
+/**
+ * Box component
+ * @description The wrapper for all svg icons.
+ * @param {string} type: the type of the machine.
+ * @param {string} color: the color of the icon.
+ * @param {string} className: other formatting properties, usually tailwind.
+ */
 function Box({ type, color, className }) {
   const map = {
     motor: <Motor color={color} className={className}></Motor>,

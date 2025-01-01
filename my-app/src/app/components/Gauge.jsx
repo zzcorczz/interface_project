@@ -2,6 +2,18 @@
 
 import React, { useEffect } from "react";
 
+/**
+ * Gauge component
+ * @description made according to the example given.
+ * The component for motor and power gauges
+ * This component utilizes responsive design. All positions are
+ * calculated programmatically.
+ * @param {number} value       - the data for the gauge.
+ * @param {number} min=0       - the minimum number of the gauge.
+ * @param {number} max=800     - the maximum number.
+ * @param {number} totalGaps=8 - the ticks you wish to have.
+ * @param {string} type        - the type of the gauge.
+ */
 export default function Gauge({
   value,
   min = 0,
@@ -10,11 +22,11 @@ export default function Gauge({
   type,
 }) {
   const r = 45;
-  const calculateAngle = (value) => ((value - min) / (max - min)) * 280 + 40; //calculate the display angle based on need.
-  const angle = Math.cos((calculateAngle(value) * Math.PI) / 180);
+  const calculateAngle = (value) => ((value - min) / (max - min)) * 280 + 40; //calculate the pointer angle based on need.
 
   const gaps = [];
 
+  // calculating position of the ticks
   for (let i = 0; i <= totalGaps; i++) {
     const percent = i / totalGaps;
     const angle = percent * 280 + 129;
@@ -37,8 +49,6 @@ export default function Gauge({
             key={index}
             className="absolute text-sm text-white"
             style={{
-              // transform: `rotate(${gap.angle}deg)`,
-              // transformOrigin: "bottom center",
               transform: "translate(-50%, -50%)",
               left: `${x}%`,
               top: `${y}%`,
@@ -52,9 +62,6 @@ export default function Gauge({
       <div
         className="absolute w-16 h-[10vw] bg-stone-500 origin-top transition-transform duration-500"
         style={{
-          // left: "44%",
-          // bottom: "-18%",
-          // bottom: "50%",
           top: "50%",
           transform: `rotate(${calculateAngle(value)}deg)`,
           transition: "transform 1s ease",

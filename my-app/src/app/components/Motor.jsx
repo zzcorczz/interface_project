@@ -2,6 +2,10 @@
 
 import React from "react";
 
+/**
+ * svg icon made by Zichuan Zhang
+ * made according to the examples given.
+ */
 const Motor = (props) => (
   <svg
     width="1024"

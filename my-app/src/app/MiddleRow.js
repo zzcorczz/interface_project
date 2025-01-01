@@ -2,6 +2,10 @@
 import React from "react";
 import Gauge from "./components/Gauge";
 
+/**
+ * MiddleRow component
+ * @description The Wrapper for the power and motor gauge.
+ */
 export default function MiddleRow({ machine }) {
   return (
     <div className="flex flex-row justify-around items-center w-[99.5%] mb-2 min-h-64 h-[25vw] bg-[#333333] rounded-lg px-4 shadow-black shadow-md">

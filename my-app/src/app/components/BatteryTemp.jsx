@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * svg icon made by Zichuan Zhang
+ * made according to the examples given.
+ */
+
 import React from "react";
 
 const BatteryTemp = (props) => (

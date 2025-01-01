@@ -1,6 +1,10 @@
 "use client";
 import React from "react";
 
+/**
+ * svg icon made by Zichuan Zhang
+ * made according to the examples given.
+ */
 const LowBattery = (props) => (
   <svg
     width="200"

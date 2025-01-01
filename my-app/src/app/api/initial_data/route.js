@@ -1,4 +1,15 @@
+/**
+ * The interface endpoint.
+ * @description this endpoint provides initial data to the frontend.
+ * if no data exists, generate new data.
+ */
+
 import prisma from "../../lib/db.ts";
+
+/**
+ * GET function.
+ * @description when GET() is called, get initial data from the database. if no data exists, generate a set of initial data.
+ */
 
 export async function GET() {
   try {
